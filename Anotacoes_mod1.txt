@@ -1,0 +1,18 @@
+# IAC
+
+terraform
+  init
+  fmt
+  validate
+  plan
+  apply
+  destroy
+
+Github
+  - criar um repositório
+  github actions
+    - Serviço para contrução de esteira de deploys
+  gitFlow
+    - Criação de uma pasta chamada .github/workflows
+    - criação do arquivo deploy.yaml
+    
