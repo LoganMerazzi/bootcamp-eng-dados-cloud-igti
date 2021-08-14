@@ -1,0 +1,4 @@
+*.csv
+Aulas/
+iac/.terraform*
+iac/*.tfstate*
