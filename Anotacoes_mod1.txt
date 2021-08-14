@@ -1,0 +1,21 @@
+# IAC
+
+terraform
+  init
+  fmt
+  validate
+  plan
+  apply
+  destroy
+
+** Pasta iac desconsiderada, uma vez que ela funcionou apenas como referencia para 
+o uso da pasta infra e criação inicial.
+
+Github
+  - criar um repositório
+  github actions
+    - Serviço para contrução de esteira de deploys
+  gitFlow
+    - Criação de uma pasta chamada .github/workflows
+    - criação do arquivo deploy.yaml
+
