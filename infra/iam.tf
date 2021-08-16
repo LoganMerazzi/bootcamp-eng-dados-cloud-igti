@@ -3,8 +3,8 @@ resource "aws_iam_role" "lambda" {
 
   assume_role_policy = <<EOF
 {
-    "Version" = "2012-10-17"
-    "Statement" = [
+    "Version": "2012-10-17"
+    "Statement": [
         {
             "Action": "sts:AssumeRole"
             "Principal": {
