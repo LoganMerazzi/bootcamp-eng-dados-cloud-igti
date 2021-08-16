@@ -1,3 +1,0 @@
-'''
-  Script para criar um job no spark...
-'''

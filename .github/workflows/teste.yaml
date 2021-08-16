@@ -15,7 +15,7 @@ jobs:
     - name: Setup python 3.8
       uses: actions/setup-python@v2
       with:
-        pyhon-version: 3.8
+        python-version: 3.8
     
     - name: Hashicorp - Setup Terraform
       uses: hashicorp/setup-terraform@v1.2.1
@@ -27,7 +27,11 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-2
 
-    - name: IaC Apply
+    - name: Build Lambda Package
+      run: |
+        sh scripts/build_lambda_package.sh
+
+    - name: IaC Plan
       env:
         COMMAND_IAC: terraform
       run: |
