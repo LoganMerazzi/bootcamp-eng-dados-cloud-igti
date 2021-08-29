@@ -15,17 +15,17 @@ resource "aws_iam_role" "lambda" {
         }
     ]
 }
-EOF
-  
+  EOF
+
   tags = {
-      IES = "IGTI",
-      CURSO = "EDC"
+    IES   = "IGTI",
+    CURSO = "EDC"
   }
 }
 
 resource "aws_iam_policy" "lambda" {
-  name = "IGTIAWSLambdaBasicExecutionRolePolicy"
-  path = "/"
+  name        = "IGTIAWSLambdaBasicExecutionRolePolicy"
+  path        = "/"
   description = "Provides write permissions to Cloudwatch Logs, S3 buckets and EMR Steps"
 
   policy = <<EOF
@@ -58,8 +58,8 @@ resource "aws_iam_policy" "lambda" {
         {
             "Action": "iam:PassRole",
             "Resource": [
-                "arn:aws:iam::127012818163:role/EMR_DefaultRole",
-                "arn:aws:iam::127012818163:role/EMR_EC2_DefaultRole"],
+                "arn:aws:iam::579013474389:role/EMR_DefaultRole",
+                "arn:aws:iam::579013474389:role/EMR_EC2_DefaultRole"],
             "Effect": "Allow"
         }
     ]
@@ -68,6 +68,6 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_attach" {
-  role = aws_iam_role.lambda.name
+  role       = aws_iam_role.lambda.name
   policy_arn = aws_iam_policy.lambda.arn
 }

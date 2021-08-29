@@ -1,0 +1,86 @@
+# IAC
+
+- Ferramentas de IaC:
+  - OpenSource
+    - Terraform
+    - Pulumi
+    - Ansible
+    - Chef Infra
+    - Puppet
+    - ...
+  - Clouds
+    - AWS CloudFormation
+    - Azure Resource Manager
+    - Google Cloud Deployment Manager
+
+- Terraform
+  - Linguagem própria chamada HCL (Hashicorp Configuration Language)
+    - Declarativa
+  
+  - Referência de estudos de resources:
+    - https://registry.terraform.io/namespaces/hashicorp
+    - Exemplo: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_object
+
+      resource "aws_s3_bucket_object" "object" {
+        bucket = "your_bucket_name"
+        key    = "new_object_key"
+        source = "path/to/file"
+
+        # The filemd5() function is available in Terraform 0.11.12 and later
+        # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
+        # etag = "${md5(file("path/to/file"))}"
+        etag = filemd5("path/to/file")
+      }
+  
+  - O terraform consegue pegar todos os códigos .tf e faz uma compilação única, então é possível separar códigos das variáveis em arquivos distintos para facilitar o uso posterior.
+      
+      variable "environment" {
+        default = "producao"
+      }
+    
+    - Para usar: 
+      valor = "${var.nome_da_variavel}"
+  
+  - Passos para criar:
+    terraform init --> Baixa todos os plugins necessários e cria o backend necessário
+    terraform fmt --> Formata o arquivo para melhor leitura
+    terraform validate --> Faz a validação dos códigos dos arquivos, para garantir que está tudo ok.
+    terraform plan --> Cria o plano de execução e mostra a ordenação de execução.
+    terraform apply --> Aplica todo o código no provider desejado
+    terraform destroy --> Remove todos os recursos que foram criados pelo apply
+
+** A Pasta iac deve desconsiderada, uma vez que ela funcionou apenas como referencia para o uso da pasta infra e criação inicial.
+
+
+GitHub
+  - criar um repositório
+  GitHub actions
+    - Serviço para contrução de esteira de deploys
+    - Existem diversas prontas para uso imediato
+  GitFlow
+    - Criação de uma pasta chamada .github/workflows <-- Específico para o GitHub... GitLab e BitBucket é diferente!!
+    - criação do arquivo deploy.yaml na pasta criada.
+      - Será o arquivo que conterá a esteira de deploy do projeto!
+
+Para configurar as chaves de acesso e criar as variáveis de ambiente:
+  - No GitHub:
+    - Settings / Secrets / "New Repository secret"
+      - Colocar o nome e inserir o valor que está no console da AWS.
+      - AWS_ACCESS_KEY e AWS_SECRET_ACCESS_KEY
+    - No yaml:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    
+Criar uma esteira de teste, para ser criada no momento de uma pull request
+  - Ciar o teste.yaml
+  - Copiar o arquivo de deploy na main para este arquivo.
+  - Alterar registros como nome, trocar o push pelo pull request e remover o apply do terraform, para não aplicar nada na nuvem. (verificar os arquivos)
+
+Para centralizar o arquivo tfstate:
+  Alterar o variables.tf e colocar no S3 o arquivo de controle.
+  Esse bucket deve ser criado manualmente (?), uma vez que a esteira não tem como criar para nós. (Ok, dá para se pensar em fazer algo previamente, como um step anterior na construção... Mas não fica neste arquivo.)
+
+Lambda function:
+  - Para subir uma função lambda automatizada na AWS o código todo deve estar em um arquivo .zip e devemos subir ele para a AWS
+  - O processo de deploy cria o arquivo.
+  - 

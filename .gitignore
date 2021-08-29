@@ -1,4 +1,4 @@
 *.csv
 Aulas/
-iac/.terraform*
-iac/*.tfstate*
+infra/.terraform*
+infra/*.tfstate*
