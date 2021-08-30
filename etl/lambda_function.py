@@ -30,10 +30,10 @@ def handler(event, context):
                             'InstanceCount': 1,
                         }
                     ],
-                    'Ec2KeyName': 'logan-igti-teste', # Obrigatório e Deve ser criado previamente, direto no console da AWS, senão ele não subirá o cluster.
+                    'Ec2KeyName': 'keypair_logan_igti_edc', # Obrigatório e Deve ser criado previamente, direto no console da AWS, senão ele não subirá o cluster.
                     'KeepJobFlowAliveWhenNoSteps': True,
                     'TerminationProtected': False,
-                    'Ec2SubnetId': 'subnet-f3ca8ba8'
+                    'Ec2SubnetId': 'subnet-6c9bb120'
                 },
 
                 Applications=[
