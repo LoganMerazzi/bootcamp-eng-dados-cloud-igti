@@ -1,4 +1,4 @@
-# Utilizado para teste durante a aula de IaC - Não remova, caso contrário, o terraform irá destruir o arquivo
+# Utilizado para teste durante a aula de IaC
 resource "aws_s3_bucket_object" "job_spark" {
   bucket = aws_s3_bucket.dl.id
   key    = "emr-code/pyspark/job_spark_from_tf.py"
