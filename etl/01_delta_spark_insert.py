@@ -18,7 +18,7 @@ enem = (
     .option("inferSchema", True)
     .option("header", True)
     .option("delimiter", ";")
-    .load("s3://datalake-logan-igti-edc-tf/raw-data/enem")
+    .load("s3://datalake-logan-igti-edc/raw-data/enem")
 )
 
 # Escreve a tabela em staging em formato delta
