@@ -2,3 +2,4 @@
 Aulas/
 infra/.terraform*
 infra/*.tfstate*
+infra/lambda*
